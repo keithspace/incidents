@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estates Department Repair Reporting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style media = "all">
+        *,
+          *:before,
+          *:after {
+            padding: 0;
+            margin: 0 auto;
+            box-sizing: border-box;
+          }
+
+          body {
+            background-color: #080710;
+          }
+
+          .background {
+            width: 430px;
+            height: 950px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 80%;
+          }
+
+          .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+          }
+
+          .shape:first-child {
+            background: linear-gradient(#50C878,
+                #228B22);
+            left: -80px;
+            top: -120px;
+          }
+
+          .shape:last-child {
+            background: linear-gradient(to right,
+                #B2BEB5,
+                #A9A9A9);
+            right: -70px;
+            bottom: -150px;
+          }
+
+          form {
+            height: auto;
+            width: 450px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 82%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+          }
+
+          form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+          }
+
+          form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+          }
+
+          label {
+            display: block;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+          }
+
+          ::placeholder {
+            color: #e5e5e5;
+          }
+
+          button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          .center{
+              width: 50%;
+              margin-top: 30px;
+              height: 100%; 
+          }
+          .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<div class="center">
+    <form action="registration.jsp" method="post">
+        <h3>Sign Up</h3>
+        <p>
+            <label for="StaffID">Staff ID:</label><br>
+            <input type="text" name="StaffID" id="StaffID"><br>
+            <p id="id_error" class="error-message"></p>
+
+            <label for="StaffName">Staff Name:</label><br>
+            <input type="text" name="StaffName" id="StaffName"><br>
+            <p id="name_error" class="error-message"></p>
+
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" id="email"><br>
+            <p id="email_error" class="error-message"></p>
+
+            <label for="phoneNumber">Phone Number:</label><br>
+            <input type="tel" name="phoneNumber" id="phoneNumber"><br>
+            <p id="phone_error" class="error-message"></p>
+
+            <label for="department">Department:</label><br>
+            <input type="text" name="department" id="department"><br>
+            <p id="dept_error" class="error-message"></p>
+
+            <label for="Password">Password:</label><br>
+            <input type="password" name="pass" id="pass"><br>
+            <p id="pass_error" class="error-message"></p>
+             <p>Do you have an account? <a href="index.html">Log In</a>
+
+            <button>Sign Up</button>
+        </p>
+    </form>
+</div>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function (e) {
+            const id = document.getElementById('StaffID');
+            const name = document.getElementById('StaffName');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phoneNumber');
+            const dept = document.getElementById('department');
+            const password = document.getElementById('pass');
+
+            const id_error = document.getElementById('id_error');
+            const name_error = document.getElementById('name_error');
+            const email_error = document.getElementById('email_error');
+            const phone_error = document.getElementById('phone_error');
+            const dept_error = document.getElementById('dept_error');
+            const pass_error = document.getElementById('pass_error');
+
+            var email_check = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+            if (id.value.trim() === '') {
+                e.preventDefault();
+                id_error.innerHTML = "Staff ID is required";
+            } else {
+                id_error.innerHTML = "";
+            }
+
+            if (name.value.trim() === '') {
+                e.preventDefault();
+                name_error.innerHTML = "Staff Name is required";
+            } else {
+                name_error.innerHTML = "";
+            }
+
+            if (!email.value.match(email_check)) {
+                e.preventDefault();
+                email_error.innerHTML = "Valid Email is required";
+            } else {
+                email_error.innerHTML = "";
+            }
+
+            if (phone.value.trim() === '') {
+                e.preventDefault();
+                phone_error.innerHTML = "Phone Number is required";
+            } else {
+                phone_error.innerHTML = "";
+            }
+
+            if (dept.value.trim() === '') {
+                e.preventDefault();
+                dept_error.innerHTML = "Department is required";
+            } else {
+                dept_error.innerHTML = "";
+            }
+
+            if (password.value.length <= 7) {
+                e.preventDefault();
+                pass_error.innerHTML = "Password must be more than 8 characters";
+            } else if (password.value.length >= 20) {
+                e.preventDefault();
+                pass_error.innerHTML = "Password cannot be more than 20 characters";
+            } else if (password.value === 'password') {
+                e.preventDefault();
+                pass_error.innerHTML = "Password cannot be 'password'";
+            } else {
+                pass_error.innerHTML = "";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
